@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>my chat</title>
 </head>
-<body onload="connect()">
+<body>
 
 <div>
-<label>youre message</label>
-    <br />
-    <input id="messageToSend" type="text" />
-<button onclick="sendMessage()">Send</button>
-<p id="response"></p>
-    
+  <label>your message
+        <input class="messageToSend" type="text"/>
+    </label>
+    <button class="btn">Send</button>
+    <p class="response"></p>
+
 </div>
 
+<script src="js.js"></script>
+<script src="stomp.js"></script>
 </body>
 </html>

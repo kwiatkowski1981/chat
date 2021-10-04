@@ -1,26 +1,30 @@
+const button = document.querySelector('.btn');
 
+let client = null;
 
-var client = null;
-
-
-function showMessage(value) {
-    var newResponse = document.createElement('p');
+const showMessage = value => {
+    const newResponse = document.createElement('p');
     newResponse.appendChild(document.createTextNode(value));
-    var response = document.getElementById('response');
+    const response = document.querySelector('.response');
     response.appendChild(newResponse);
-}
+};
 
-function connect() {
+const connect = () => {
     client = Stomp.client('ws://localhost:8080/chat');
+    console.log(client);
     client.connect({}, function (frame) {
-        client.subscribe("/topic/messages", function(message) {
-            showMessage(JSON.parse(message.body).value)
+        client.subscribe("/topic/messages", function (message) {
+            showMessage(JSON.parse(message.body).value);
 
         });
     })
-}
+};
 
-function sendMessage() {
-var messageToSend = document.getElementById('messageToSend').value;
-client.send("/app/chat", {}, JSON.stringify({'value': messageToSend}) );
-}
+const sendMessage = () => {
+    const messageToSend = document.querySelector('.messageToSend').value;
+    console.log(messageToSend);
+    client.send("/app/chat", {}, JSON.stringify({'value': messageToSend}));
+};
+
+window.addEventListener('DOMContentLoaded', connect, false);
+button.addEventListener('click', sendMessage);
